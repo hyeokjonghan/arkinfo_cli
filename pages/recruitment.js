@@ -2,7 +2,7 @@ import ContentLayout from "../layout/contentLayout";
 import PageLayout from "../layout/pageLayout";
 import style from "@/styles/recruitment/recruitment.module.scss"
 import OperatorCard from "../components/card/operator";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import OperatorLabel from "@/components/label/operator";
 
 export default function RecruimentPage({results}) {
@@ -78,7 +78,7 @@ export default function RecruimentPage({results}) {
         })
     }
 
-    const setOpListEvent = () => {
+    const setOpListEvent = useCallback(() => {
         let matchOpList = {}
         if(selectTag.length > 0) {
             let selectTagSet = new Set(selectTag)
@@ -152,9 +152,7 @@ export default function RecruimentPage({results}) {
         } else {
             setSelectOp([])
         }
-        
-
-    }
+    }, [selectTag])
 
     // 모든 경우의 수 반환..
     const getCombinations = (targetArr) => {
