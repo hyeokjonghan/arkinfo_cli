@@ -36,7 +36,8 @@ export default function CommonNav() {
     const searchWrapBackgruond = [
         `${process.env.NEXT_PUBLIC_CLOUD_URL}images/27_i27.png`,
         `${process.env.NEXT_PUBLIC_CLOUD_URL}images/28_i12.png`,
-        `${process.env.NEXT_PUBLIC_CLOUD_URL}images/35_i05.png`
+        `${process.env.NEXT_PUBLIC_CLOUD_URL}images/35_i05.png`,
+        `${process.env.NEXT_PUBLIC_CLOUD_URL}images/33_i11.png`
     ];
     const randomBack = searchWrapBackgruond[Math.floor(Math.random() * searchWrapBackgruond.length)]
     const moveSearchPage = () => {
