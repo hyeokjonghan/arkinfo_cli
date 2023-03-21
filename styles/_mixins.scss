@@ -1,3 +1,9 @@
+@mixin hover-supported {    
+    @media (hover: hover) { 
+      @content;
+    }
+}
+
 @mixin button () {
     background-color: $sub-primary-color;
     color: $text-color;
@@ -7,8 +13,10 @@
     -webkit-box-shadow: 1px 6px 6px 0px rgba(0,0,0,0.58); 
     box-shadow: 1px 6px 6px 0px rgba(0,0,0,0.58);
     border: none;
-    &:hover {
-        background-color: $active-color;
+    @include hover-supported() {
+        &:hover {
+            background-color: $active-color;
+        }
     }
     &.selected{
         background-color: $active-color;

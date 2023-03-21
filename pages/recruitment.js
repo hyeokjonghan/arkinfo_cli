@@ -4,6 +4,7 @@ import style from "@/styles/recruitment/recruitment.module.scss"
 import OperatorCard from "../components/card/operator";
 import { useCallback, useEffect, useState } from "react";
 import OperatorLabel from "@/components/label/operator";
+import { isSubSet, interSectSets, getCombinations } from "@/lib/HjMath";
 
 export default function RecruimentPage({results}) {
     const tagList = results.tagList
@@ -32,23 +33,6 @@ export default function RecruimentPage({results}) {
 
     const setPrintImgEvent = () => {
         setPrintImg(current => !current)
-    }
-
-    const isSubSet = (superSet, setA) => {
-        let result = true
-        setA.forEach(e => {
-            if(!superSet.has(e)) result = false
-        })
-        return result
-    }
-
-    const interSectSets = (setA, setB) => {
-        let intersection = []
-        setB.forEach(e=> {
-            if(setA.has(e)) intersection.push(e)
-        })
-
-        return intersection
     }
 
     const setSelectTagEvent = (e) => {
@@ -155,17 +139,7 @@ export default function RecruimentPage({results}) {
     }, [selectTag])
 
     // 모든 경우의 수 반환..
-    const getCombinations = (targetArr) => {
-        let result = []
-        let f = (tempArr, targetArr) => {
-            for(let i = 0; i < targetArr.length; i++) {
-                result = [...result, [...tempArr, targetArr[i]]]
-                f([...tempArr, targetArr[i]], targetArr.slice(i+1))
-            }
-        }
-        f([],targetArr)
-        return result
-    }
+
 
     useEffect(() => {
         setOpListEvent()
