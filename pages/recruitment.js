@@ -5,6 +5,7 @@ import OperatorCard from "../components/card/operator";
 import { useCallback, useEffect, useState } from "react";
 import OperatorLabel from "@/components/label/operator";
 import { isSubSet, interSectSets, getCombinations } from "@/lib/HjMath";
+import axios from "axios";
 
 export default function RecruimentPage({results}) {
     const tagList = results.tagList
@@ -226,8 +227,16 @@ export default function RecruimentPage({results}) {
 
 // 일단 심플하게 fetch쪽으로 처리, 다음에 Store 처리..
 export async function getServerSideProps() {
-    const tagList = await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/recruitment/tag/list`)).json()
-    const opList = await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/recruitment/op/list`)).json()
+    
+    const tagList = await(await axios.get(`https://api.arkinfo.kr/api/recruitment/tag/list`)).data
+    const opList = await(await axios.get(`https://api.arkinfo.kr/api/recruitment/op/list`)).data
+
+    // Local Port쪽 오류나는 이유가...?
+    // const tagList = await(await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/recruitment/tag/list`)).data
+    // const opList = await(await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/recruitment/op/list`)).data
+
+    
+
     return {
         props: {
             results:{

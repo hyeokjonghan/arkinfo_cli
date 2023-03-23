@@ -3,7 +3,9 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import DefaultLayout from '../layout/defaultLayout'
 import '@/styles/global.scss'
 import Script from 'next/script'
-export default function App({ Component, pageProps }) {
+import {wrapper} from '../store'
+
+function App({ Component, pageProps }) {
 
   return (
     <DefaultLayout>
@@ -30,3 +32,5 @@ export default function App({ Component, pageProps }) {
   )
 
 }
+
+export default wrapper.withRedux(App)

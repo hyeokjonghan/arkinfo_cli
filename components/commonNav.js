@@ -1,7 +1,9 @@
 import { useRouter } from "next/router"
 import Link from "next/link";
 import navStyle from "@/styles/commonNav.module.scss"
-
+import { useEffect, useState } from "react";
+import searchOp, * as operatorActions from '@/store/modules/searchOp'
+import { useSelector, useDispatch } from 'react-redux';
 export default function CommonNav() {
     const router = useRouter();
     const menuList = [
@@ -26,27 +28,46 @@ export default function CommonNav() {
             is_menu:true
         }
     ];
-    
+
+    const dispatch = useDispatch()
+    const searchOpName = useSelector(({searchOp}) => searchOp.searchOption.name)
+    const [searchPrintOpName, setSaerchPrintOpName] = useState(searchOpName)
+
     const menuPrint = menuList.map((menu, index) => {
         if(menu.is_menu) {
             return <li key={index}><Link className={router.pathname.includes(menu.path)? navStyle.active:""} href={menu.path}>{menu.name}</Link></li>
         }
     })
 
+    
     const searchWrapBackgruond = [
         `${process.env.NEXT_PUBLIC_CLOUD_URL}images/27_i27.png`,
         `${process.env.NEXT_PUBLIC_CLOUD_URL}images/28_i12.png`,
         `${process.env.NEXT_PUBLIC_CLOUD_URL}images/35_i05.png`,
         `${process.env.NEXT_PUBLIC_CLOUD_URL}images/33_i11.png`
     ];
-    const randomBack = searchWrapBackgruond[Math.floor(Math.random() * searchWrapBackgruond.length)]
+
+    const [randomBack,setRandomBack] = useState(``)
+    useEffect(() => {
+        setRandomBack(searchWrapBackgruond[Math.floor(Math.random() * searchWrapBackgruond.length)])
+    },[router.route])
+
     const moveSearchPage = () => {
         const searchValue = document.getElementById('searchOp').value
         router.push({
-            pathname: '/operator/search',
+            pathname: '/operator',
             query:{name:`${searchValue}`}
-        }, `/operator/search`)
+        }, `/operator`)
     }
+
+    const searchInputBind = (e) => {
+        setSaerchPrintOpName(e.target.value)
+        dispatch(operatorActions.setSearchOptionName(e.target.value))
+    }
+
+    useEffect(() => {
+        setSaerchPrintOpName(searchOpName)
+    }, [searchOpName])
 
     const moveSearchPageKey = (e) => {
         if(e.keyCode === 13) {
@@ -69,7 +90,7 @@ export default function CommonNav() {
                         <div className={`container-xl ${navStyle.searchWrap}`}>
                             <div>
                                 <div className={navStyle.form}>
-                                    <input type="text" placeholder="오퍼레이터 검색" onKeyUp={moveSearchPageKey} id="searchOp"></input>
+                                    <input type="text" placeholder="오퍼레이터 검색" onKeyUp={moveSearchPageKey} onChange={searchInputBind} value={searchPrintOpName} id="searchOp"></input>
                                     <button onClick={moveSearchPage}><i className="bi bi-search"></i></button>
                                 </div>
                             </div>
