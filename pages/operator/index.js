@@ -46,6 +46,9 @@ export default function OperatorPage() {
     }
 
     useEffect(() => {
+        if(searchOpValue.lastSearchOption.name !== searchOpValue.searchOption.name) {
+            setFirstPage()
+        }
         if(searchOpValue.operatorList.length === 0 || !_.isEqual(searchOpValue.searchOption, searchOpValue.lastSearchOption)) {
             searchOpApi()
         }
@@ -67,6 +70,7 @@ export default function OperatorPage() {
 
     // 등급 선택시 Filter 적용
     const setSelectedFilterRarity = (item) => {
+        setFirstPage()
         const index = searchRarity.indexOf(item.value)
         if (index !== -1) {
             setSearchRarity((current) => {
@@ -86,12 +90,12 @@ export default function OperatorPage() {
     })
 
     useEffect(() => {
-        setFirstPage()
         setSearchRarityCallback()
     }, [searchRarity])
 
     // 포지션 선택시 Filter 적용
     const setProfessionFilterEvent = (item) => {
+        setFirstPage()
         const index = searchProfession.indexOf(item.value)
         if (index !== -1) {
             setSearchProfession((current) => {
@@ -111,7 +115,6 @@ export default function OperatorPage() {
     })
 
     useEffect(() => {
-        setFirstPage()
         setProfessionFilterCallback()
     }, [searchProfession])
 
@@ -217,12 +220,13 @@ export default function OperatorPage() {
     }
 
     const printOpListJsx = searchOpValue.operatorList.map((item) => {
+        const rarityClass = style["rarity"+item.rarity]
         return <>
-            <div key={item._id} className={style.operatorItem}>
+            <div key={item._id} className={`${style.operatorItem} ${rarityClass}`}>
                 <div>
                     <Image width="180" height="180" src={item.default_avartar_img} alt="Operator Img"></Image>
                 </div>
-                <div>{item.name}</div>
+                <div className={style.operatorName}>{item.name}</div>
             </div>
         </>
     })
