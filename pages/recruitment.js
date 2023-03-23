@@ -228,12 +228,12 @@ export default function RecruimentPage({results}) {
 // 일단 심플하게 fetch쪽으로 처리, 다음에 Store 처리..
 export async function getServerSideProps() {
     
-    // const tagList = await(await axios.get(`https://api.arkinfo.kr/api/recruitment/tag/list`)).data
-    // const opList = await(await axios.get(`https://api.arkinfo.kr/api/recruitment/op/list`)).data
+    const tagList = await(await axios.get(`https://api.arkinfo.kr/api/recruitment/tag/list`)).data
+    const opList = await(await axios.get(`https://api.arkinfo.kr/api/recruitment/op/list`)).data
 
     // Local Port쪽 오류나는 이유가...?
-    const tagList = await(await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/recruitment/tag/list`)).data
-    const opList = await(await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/recruitment/op/list`)).data
+    // const tagList = await(await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/recruitment/tag/list`)).data
+    // const opList = await(await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/recruitment/op/list`)).data
 
     
 
