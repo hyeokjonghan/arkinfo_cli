@@ -38,7 +38,8 @@ const operatorSlice = createSlice({
             state.searchOption = {
                 rarity:[],
                 name:'',
-                profession:[]
+                profession:[],
+                page:1
             }
         },
         setLastSearchOption: (state) => {
