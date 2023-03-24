@@ -219,10 +219,14 @@ export default function OperatorPage() {
         setFilterOn((current) => { return !current })
     }
 
+    const moveOperatorDetail = (id) => {
+        router.push(`/operator/${id}`)
+    }
+
     const printOpListJsx = searchOpValue.operatorList.map((item) => {
         const rarityClass = style["rarity"+item.rarity]
         return <>
-            <div key={item._id} className={`${style.operatorItem} ${rarityClass}`}>
+            <div key={item._id} className={`${style.operatorItem} ${rarityClass}`} onClick={() => {moveOperatorDetail(item._id)}}>
                 <div>
                     <Image width="180" height="180" src={item.default_avartar_img} alt="Operator Img"></Image>
                 </div>
