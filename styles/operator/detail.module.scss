@@ -121,7 +121,6 @@
             .defaultInfo {
                 display: flex;
                 gap: 2px;
-                margin-top: 30px;
                 @media (max-width:768px) {
                     justify-content: center;
                 }
@@ -191,6 +190,29 @@
                         column-gap: 3px;
                         line-height: 12px;
                     }
+                }
+            }
+
+            .choosePhasesWrap {
+                margin-top: 30px;
+                ul {
+                    display: flex;
+                    gap: 5px;
+                    li {
+                        border: 1px solid rgba(255, 255, 255, 0.8);
+                        padding: 5px;
+                        background-color: rgba(0,0,0,0.3);
+                        cursor: pointer;
+                        &.active {
+                            border: 1px solid #FFF;
+                            background-color: #000;
+                        }
+                        &:hover {
+                            border: 1px solid #FFF;
+                            background-color: #000;
+                        }
+                    }
+
                 }
             }
         }
