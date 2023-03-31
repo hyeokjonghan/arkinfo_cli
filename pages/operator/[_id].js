@@ -75,7 +75,6 @@ export default function OperatorDetail({ results }) {
     }
 
     useEffect(() => {
-        console.dir(operator)
         if(operator.phases) {
             setNowPhases(operator.phases[0])
         }
@@ -189,7 +188,6 @@ export default function OperatorDetail({ results }) {
 
         }).catch((error) => {
             // end Loading
-            console.dir(error)
             // alert('잘못된 접근입니다.')
             // router.push('/operator')
         })
